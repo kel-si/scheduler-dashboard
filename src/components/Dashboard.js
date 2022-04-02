@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import Loading from "./Loading.js";
 
 import classnames from "classnames";
+import Panel from "./Panel.js";
 
 const data = [
   {
@@ -29,6 +30,7 @@ const data = [
 
 class Dashboard extends Component {
   state = { loading: false };
+
   render() {
     const dashboardClasses = classnames("dashboard");
 
@@ -36,7 +38,11 @@ class Dashboard extends Component {
       return <Loading />;
     }
 
-    return <main className={dashboardClasses} />;
+    const panels = data.map((e) => {
+      return <Panel key={e.id} id={e.id} label={e.label} value={e.value} />;
+    });
+
+    return <main className={dashboardClasses}>{panels}</main>;
   }
 }
 
